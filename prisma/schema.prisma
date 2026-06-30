@@ -1,0 +1,61 @@
+// CraftsmanOnDemand — Phase 1 schema (lead-capture site)
+//
+// This intentionally only models what the marketing/lead-capture site needs:
+// consumer job requests and craftsman waitlist signups. The full marketplace
+// schema (users, bids, escrow transactions, reviews, etc.) is documented in
+// /docs/phase-2-marketplace-schema.prisma and gets merged in once Stripe
+// Connect, Checkr, and the business entity are in place — see /docs/ROADMAP.md.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  CONVERTED
+  CLOSED
+}
+
+model Lead {
+  id            String     @id @default(cuid())
+  fullName      String
+  email         String
+  phone         String?
+  zipcode       String
+  category      String // service slug, e.g. "drywall-repair"
+  title         String
+  description   String
+  preferredDate String?
+  budgetMin     Int?
+  budgetMax     Int?
+  status        LeadStatus @default(NEW)
+  source        String? // e.g. "organic", "dfw-page", "service-page"
+  createdAt     DateTime   @default(now())
+
+  @@index([status])
+  @@index([zipcode])
+}
+
+model CraftsmanApplication {
+  id               String     @id @default(cuid())
+  fullName         String
+  businessName     String?
+  email            String
+  phone            String
+  zipcode          String
+  trades           String[] // service slugs they want to offer
+  yearsExperience  Int?
+  portfolioUrl     String?
+  notes            String?
+  status           LeadStatus @default(NEW)
+  createdAt        DateTime   @default(now())
+
+  @@index([status])
+  @@index([zipcode])
+}

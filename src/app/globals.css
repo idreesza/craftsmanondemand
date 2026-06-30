@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  /* Canvas / surfaces */
+  --canvas: #efebe3;
+  --canvas-raised: #f8f5ee;
+  --canvas-deep: #1f1e1a;
+
+  /* Ink */
+  --ink: #21201c;
+  --ink-soft: #57534a;
+  --ink-on-deep: #efebe3;
+  --ink-on-deep-soft: #b9b3a4;
+
+  /* Brand accents */
+  --steel: #3e5c6b;
+  --steel-deep: #2c4351;
+  --rust: #b5481f;
+  --rust-deep: #8e3717;
+  --brass: #b08d4f;
+
+  /* Lines */
+  --line: #d8d2c4;
+  --line-deep: #3a3833;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-canvas-raised: var(--canvas-raised);
+  --color-canvas-deep: var(--canvas-deep);
+
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-on-deep: var(--ink-on-deep);
+  --color-ink-on-deep-soft: var(--ink-on-deep-soft);
+
+  --color-steel: var(--steel);
+  --color-steel-deep: var(--steel-deep);
+  --color-rust: var(--rust);
+  --color-rust-deep: var(--rust-deep);
+  --color-brass: var(--brass);
+
+  --color-line: var(--line);
+  --color-line-deep: var(--line-deep);
+
+  --font-display: var(--font-archivo);
+  --font-body: var(--font-plex-sans);
+  --font-utility: var(--font-plex-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible keyboard focus everywhere, styled instead of suppressed */
+:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Ticket / work-order signature texture: a soft perforation rule */
+.ticket-perforation {
+  background-image: radial-gradient(circle, var(--canvas) 2px, transparent 2.5px);
+  background-size: 14px 1px;
+  background-repeat: repeat-x;
+}
+
+.stamp-rotate {
+  transform: rotate(-9deg);
+}
