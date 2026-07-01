@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { GetAQuoteForm } from "@/components/GetAQuoteForm";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Get a Quote",
   description: `Post a job and get bids from verified craftsmen across the ${site.region}.`,
-};
+  path: "/get-a-quote",
+});
 
 export default function GetAQuotePage() {
   return (
@@ -16,7 +18,7 @@ export default function GetAQuotePage() {
           Get a Quote
         </p>
         <h1 className="mt-3 font-display text-3xl font-extrabold text-ink sm:text-4xl">
-          Tell us about the job
+          Get a Free Quote from Verified DFW Craftsmen
         </h1>
         <p className="mt-3 text-ink-soft">
           Takes about two minutes. No cost to post, and no account required to get started.

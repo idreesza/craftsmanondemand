@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy (Draft)",
-};
+  description: `Draft privacy policy for ${site.name}, pending attorney review.`,
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

@@ -12,6 +12,7 @@ export interface BlogFAQ {
 export interface BlogPost {
   slug: string;
   title: string;
+  h1: string;
   description: string;
   datePublished: string;
   readTime: string;
@@ -24,6 +25,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "drywall-repair-cost-dallas-fort-worth",
     title: "How Much Does Drywall Repair Cost in Dallas-Fort Worth?",
+    h1: "Drywall Repair Cost in DFW: What Affects the Price and How to Compare Quotes",
     description:
       "A breakdown of what drives drywall repair pricing in DFW — patch size, texture matching, paint, and how to compare quotes fairly.",
     datePublished: "2026-06-19",
@@ -72,6 +74,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "permits-for-handyman-work-in-texas",
     title: "Do You Need a Permit for Handyman Work in Texas?",
+    h1: "Handyman Work Permits in Texas: What's Licensed, What Isn't, and Why It Matters",
     description:
       "What's actually licensed in Texas, what isn't, and why a single job — like a leaky faucet plus drywall damage — can involve both at once.",
     datePublished: "2026-06-19",
@@ -116,6 +119,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "how-to-compare-contractor-bids",
     title: "How to Compare Contractor Bids Without Getting Burned",
+    h1: "Comparing Contractor Bids: The 4 Things That Matter More Than Price",
     description:
       "The lowest bid isn't always the best one. A practical framework for comparing quotes on home repair work.",
     datePublished: "2026-06-19",

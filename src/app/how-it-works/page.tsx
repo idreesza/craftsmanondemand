@@ -3,12 +3,14 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { CTABand } from "@/components/CTABand";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "How It Works",
   description:
     "How CraftsmanOnDemand's bidding, verification, and destination-fee model works for DFW homeowners and craftsmen.",
-};
+  path: "/how-it-works",
+});
 
 export default function HowItWorksPage() {
   return (
@@ -19,8 +21,11 @@ export default function HowItWorksPage() {
             How It Works
           </p>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-ink sm:text-4xl">
-            A bidding model built around seeing the work first.
+            How Verified Craftsman Bidding Works in Dallas-Fort Worth
           </h1>
+          <p className="mt-2 font-display text-lg font-semibold text-ink">
+            A bidding model built around seeing the work first.
+          </p>
           <p className="mt-4 text-ink-soft">
             We&apos;re currently onboarding craftsmen across DFW. The flow below is how the
             platform works once bidding is live in your area — posting a job today puts you on

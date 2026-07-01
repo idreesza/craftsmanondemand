@@ -1,0 +1,38 @@
+# CraftsmanOnDemand
+> A portfolio-first marketplace connecting Dallas-Fort Worth homeowners with
+> verified independent craftsmen for home repair and improvement.
+
+## About
+CraftsmanOnDemand connects consumers in the DFW Metroplex with verified
+craftsmen. Homeowners post jobs and receive flat-price bids from craftsmen
+who have passed identity verification and background checks. Every craftsman
+profile includes a real portfolio of completed work — not just a star rating.
+
+## How it works
+1. Homeowner posts a job with photos and zip code — free, no account required
+2. Verified craftsmen in the area bid with a flat project price
+3. Bids are sorted: Verified first, then by rating, then by price
+4. A $50 refundable destination fee is paid before an in-person visit
+5. If the quote is accepted, work begins. If not, the fee is refunded.
+
+## Services (live)
+- Drywall repair
+- Interior painting
+- Furniture assembly
+- General handyman
+- Deck and fence repair
+- Gutter cleaning
+- TV mounting
+- Light fixture installation
+
+## Services (coming soon — licensed trades)
+- Plumbing repair (requires Texas TDLR license)
+- Electrical repair (requires Texas TDLR license)
+
+## Service Area
+Dallas-Fort Worth Metroplex, Texas — including Dallas, Fort Worth, Plano,
+Frisco, Arlington, Irving, McKinney, Garland, Denton, Lewisville, Carrollton,
+Grand Prairie, Mesquite, Richardson, and Allen.
+
+## Contact
+hello@craftsmanondemand.com

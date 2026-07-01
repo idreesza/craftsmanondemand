@@ -5,12 +5,14 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { CTABand } from "@/components/CTABand";
 import { services } from "@/lib/services";
 import { dfwCities, site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "DFW Metroplex Service Area",
   description:
     "CraftsmanOnDemand is building verified craftsman coverage across the Dallas-Fort Worth Metroplex — see current service categories and coverage by city.",
-};
+  path: "/dfw",
+});
 
 export default function DFWPage() {
   const jsonLd = {
@@ -39,7 +41,7 @@ export default function DFWPage() {
             Service Area
           </p>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-ink sm:text-4xl">
-            {site.region}
+            Verified Craftsmen Serving the {site.region}
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
             We&apos;re onboarding verified craftsmen city by city across DFW rather than

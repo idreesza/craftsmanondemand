@@ -3,11 +3,13 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { blogPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Blog",
   description: `Guides on home repair costs, permits, and hiring craftsmen in the ${site.region}.`,
-};
+  path: "/blog",
+});
 
 export default function BlogIndexPage() {
   return (
@@ -17,7 +19,7 @@ export default function BlogIndexPage() {
           Blog
         </p>
         <h1 className="mt-3 font-display text-3xl font-extrabold text-ink sm:text-4xl">
-          Guides for DFW homeowners
+          DFW Home Improvement Guides &amp; Cost Resources
         </h1>
 
         <div className="mt-10 space-y-6">

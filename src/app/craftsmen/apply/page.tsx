@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { CraftsmanApplyForm } from "@/components/CraftsmanApplyForm";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Apply as a Craftsman",
   description: `Join the early access list for ${site.name} and get matched with homeowners across the ${site.region}.`,
-};
+  path: "/craftsmen/apply",
+});
 
 export default function CraftsmanApplyPage() {
   return (
@@ -17,8 +19,11 @@ export default function CraftsmanApplyPage() {
             For Craftsmen
           </p>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-ink sm:text-4xl">
-            Get matched with real jobs, not leads
+            Apply as a Verified Craftsman in Dallas-Fort Worth
           </h1>
+          <p className="mt-2 font-display text-lg font-semibold text-ink">
+            Get matched with real jobs, not leads.
+          </p>
           <p className="mt-4 text-ink-soft">
             {site.shortName} is built around project-based bids and real portfolio work — not
             pay-to-call leads. We&apos;re onboarding craftsmen city by city across DFW as we open

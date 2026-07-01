@@ -2,7 +2,7 @@ export const site = {
   name: "CraftsmanOnDemand",
   shortName: "CraftsmanOnDemand",
   tagline: "DFW's portfolio-first marketplace for verified craftsmen",
-  domain: "https://www.craftsmanondemand.com",
+  domain: "https://craftsmanondemand.com",
   region: "Dallas-Fort Worth Metroplex",
   regionShort: "DFW",
   destinationFee: 50,

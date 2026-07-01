@@ -4,11 +4,13 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { CTABand } from "@/components/CTABand";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Services",
   description: `Browse home repair and improvement services available through ${site.name} across the ${site.region}.`,
-};
+  path: "/services",
+});
 
 export default function ServicesIndexPage() {
   return (
@@ -19,7 +21,7 @@ export default function ServicesIndexPage() {
             Services
           </p>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-ink sm:text-4xl">
-            What you can post a job for
+            Home Repair &amp; Improvement Services in Dallas-Fort Worth
           </h1>
           <p className="mt-4 max-w-2xl text-ink-soft">
             General handyman categories are live now. Licensed trades — electrical and plumbing —

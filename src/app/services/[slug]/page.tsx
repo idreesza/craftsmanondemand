@@ -6,6 +6,7 @@ import { GetAQuoteForm } from "@/components/GetAQuoteForm";
 import { StampBadge } from "@/components/StampBadge";
 import { services, getServiceBySlug } from "@/lib/services";
 import { site } from "@/lib/site";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -19,10 +20,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = getServiceBySlug(slug);
   if (!service) return {};
-  return {
+  return pageMetadata({
     title: service.name,
     description: `${service.shortDescription} Compare bids from verified craftsmen across the ${site.region}.`,
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServicePage({
@@ -46,28 +48,18 @@ export default async function ServicePage({
     },
     areaServed: site.region,
     description: service.shortDescription,
-    ...(service.faqs.length > 0 && {}),
   };
 
-  const faqJsonLd =
-    service.faqs.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: service.faqs.map((f) => ({
-            "@type": "Question",
-            name: f.question,
-            acceptedAnswer: { "@type": "Answer", text: f.answer },
-          })),
-        }
-      : null;
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: service.name, path: `/services/${service.slug}` },
+  ]);
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      {faqJsonLd && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      )}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
 
       <section className="border-b border-line bg-canvas-raised py-14 sm:py-16">
         <Container>

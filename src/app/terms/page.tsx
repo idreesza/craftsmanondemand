@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Terms of Service (Draft)",
-};
+  description: `Draft terms of service for ${site.name}, pending attorney review.`,
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

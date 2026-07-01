@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { JobTicketHero } from "@/components/JobTicketHero";
@@ -5,10 +6,48 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { CTABand } from "@/components/CTABand";
 import { services } from "@/lib/services";
 import { dfwCities, site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: `Verified Craftsmen in ${site.region}`,
+  description:
+    "Post a job, compare bids from verified local craftsmen, and see real portfolio work before you hire — serving the Dallas-Fort Worth Metroplex.",
+  path: "/",
+});
 
 export default function HomePage() {
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: site.name,
+      description:
+        "Portfolio-first marketplace connecting Dallas-Fort Worth homeowners with verified independent craftsmen.",
+      areaServed: dfwCities.map((city) => ({ "@type": "City", name: `${city}, TX` })),
+      url: site.domain,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: site.name,
+      url: site.domain,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: site.name,
+      url: site.domain,
+      email: site.supportEmail,
+    },
+  ];
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero */}
       <section className="overflow-hidden border-b border-line bg-canvas py-16 sm:py-20">
         <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
@@ -17,8 +56,11 @@ export default function HomePage() {
               {site.region} · Now building craftsman coverage
             </p>
             <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.05] text-ink sm:text-5xl">
-              See the work before you hire the worker.
+              Verified Handymen &amp; Craftsmen in Dallas-Fort Worth
             </h1>
+            <p className="mt-4 font-display text-xl font-semibold text-ink">
+              See the work before you hire the worker.
+            </p>
             <p className="mt-5 max-w-lg text-lg leading-relaxed text-ink-soft">
               {site.shortName} is a portfolio-first marketplace for DFW homeowners and verified
               independent craftsmen. Post a job, compare real bids side by side, and pick based on

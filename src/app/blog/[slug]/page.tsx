@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { blogPosts, getPostBySlug } from "@/lib/blog";
 import { site } from "@/lib/site";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return blogPosts.map((p) => ({ slug: p.slug }));
@@ -17,10 +18,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
-  return {
+  return pageMetadata({
     title: post.title,
     description: post.description,
-  };
+    path: `/blog/${post.slug}`,
+  });
 }
 
 export default async function BlogPostPage({
@@ -42,18 +44,11 @@ export default async function BlogPostPage({
     publisher: { "@type": "Organization", name: site.name },
   };
 
-  const faqJsonLd =
-    post.faqs.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: post.faqs.map((f) => ({
-            "@type": "Question",
-            name: f.question,
-            acceptedAnswer: { "@type": "Answer", text: f.answer },
-          })),
-        }
-      : null;
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
 
   return (
     <article className="py-14 sm:py-16">
@@ -61,12 +56,10 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      {faqJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
 
       <Container className="max-w-2xl">
         <Link href="/blog" className="font-utility text-xs uppercase tracking-wide text-steel-deep hover:text-rust">
@@ -82,7 +75,7 @@ export default async function BlogPostPage({
           })}
         </p>
         <h1 className="mt-2 font-display text-3xl font-extrabold leading-tight text-ink sm:text-4xl">
-          {post.title}
+          {post.h1}
         </h1>
 
         <div className="mt-6 rounded-sm border-l-4 border-rust bg-canvas-raised p-4 text-sm leading-relaxed text-ink">
