@@ -11,9 +11,13 @@
 - URL format: clean URLs, no .html extensions
 - Trailing slash: no trailing slash
 - Canonical: non-www, https
-- www redirect: www → non-www (configured in `next.config.ts` via a host-based redirect;
-  the DNS/Vercel domain also needs `www.craftsmanondemand.com` added as a redirect domain
-  pointing at the primary `craftsmanondemand.com` project domain)
+- www redirect: www → non-www, configured via Vercel's Domains settings only (add
+  `www.craftsmanondemand.com` as a domain and set it to redirect to
+  `craftsmanondemand.com`). Do NOT also add an app-level redirect in `next.config.ts` for
+  this — a same-direction redirect was added there on 2026-07-01 and caused an
+  `ERR_TOO_MANY_REDIRECTS` loop against Vercel's own domain redirect once the custom
+  domain was connected. It was removed the same day. Keep domain-level redirects entirely
+  in Vercel's dashboard going forward.
 
 ## Fixed & Verified — 2026-07-01
 - Removed `FAQPage` JSON-LD from `/services/[slug]` and `/blog/[slug]` (Rule 3 — deprecated
@@ -33,7 +37,7 @@
 - Blog posts now have a distinct `h1` field separate from the `<title>`/meta description,
   matching the content spec (previously both used the same string).
 - Changed canonical domain from `https://www.craftsmanondemand.com` to
-  `https://craftsmanondemand.com` (non-www) and added a redirect in `next.config.ts`.
+  `https://craftsmanondemand.com` (non-www).
 - Rewrote `robots.ts` to include the AI-crawler allow rules (GPTBot, ChatGPT-User,
   PerplexityBot, ClaudeBot, Claude-Web, anthropic-ai, Google-Extended) and the
   `/admin/`, `/api/`, `/sign-in`, `/sign-up`, `/*?*` disallow rules — previously only had a
@@ -47,12 +51,22 @@
 - `npx tsc --noEmit`, `next build`, and `npx eslint src` all pass clean after the above
   changes.
 
+## Fixed & Verified — 2026-07-01 (later same day)
+- Removed the `next.config.ts` www→non-www redirect added earlier that day. It caused
+  `ERR_TOO_MANY_REDIRECTS` once the custom domain was connected in Vercel, because it
+  fought with Vercel's own domain-level redirect in the opposite/same direction. Domain
+  redirects for this project are now handled exclusively through Vercel's Domains
+  settings — see Standing Decisions above.
+
 ## Open Items
 - [ ] DATABASE_URL environment variable set in Vercel
 - [ ] RESEND_API_KEY and LEAD_NOTIFICATION_EMAIL (optional)
-- [ ] Domain craftsmanondemand.com pointed to Vercel, and www.craftsmanondemand.com added
-      as a redirect-only domain in the Vercel project so the `next.config.ts` host redirect
-      has something to catch
+- [ ] Confirm in Vercel → Settings → Domains that craftsmanondemand.com is the primary
+      production domain and www.craftsmanondemand.com is set to redirect to it (not the
+      other way around, and not both pointing at each other)
+- [ ] If DNS is proxied through Cloudflare or another CDN in front of Vercel, confirm SSL
+      mode is "Full" or "Full (strict)" — "Flexible" SSL in front of Vercel is a common
+      separate cause of redirect loops
 - [ ] Google Search Console property created and sitemap submitted
 - [ ] Google Business Profile claimed and set up as service-area business
 - [ ] GBP hours: [OWNER TO CONFIRM: actual operating hours]
